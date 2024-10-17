@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ObjectManager {
 
     // функция добавления растений
-    public static void addPlants(Scanner scanner) {
+    public static void addPlants(Scanner scanner, String fileName) {
         while (true) {
             // Запрос имени для объекта Plant
             System.out.print("Введите название растения: ");
@@ -15,9 +15,9 @@ public class ObjectManager {
             int plantAmount = scanner.nextInt();
             // Очистка буфера после ввода числа
             scanner.nextLine();
-            // Создаем обьект Plant
+            // Создаем объект Plant
             Plant plant = new Plant(plantName, plantAmount);
-            CRUDOperations.createObject(plant);
+            CRUDOperations.createObject(plant, fileName);
 
             System.out.print("Хотите ввести еще одно растение? (Y/N): ");
             String response = scanner.nextLine();
@@ -28,19 +28,20 @@ public class ObjectManager {
     }
 
     // функция добавления животных
-    public static void addAnimals(Scanner scanner) {
+    public static void addAnimals(Scanner scanner, String fileName) {
         while (true) {
             // Запрос имени для объекта Animal
             System.out.print("Введите название животного: ");
             String animalName = scanner.nextLine();
-            // Запрос количества для объекта Plant
+            // Запрос количества для объекта Animal
             System.out.print("Введите количество животных: ");
             int animalAmount = scanner.nextInt();
             // Очистка буфера после ввода числа
             scanner.nextLine();
-            // Создаем обьект Animal
+            // Создаем объект Animal
             Animal animal = new Animal(animalName, animalAmount);
-            CRUDOperations.createObject(animal);
+            CRUDOperations.createObject(animal, fileName);
+
             System.out.print("Хотите ввести еще одно животное? (Y/N): ");
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("N")) {
@@ -50,7 +51,7 @@ public class ObjectManager {
     }
 
     // функция добавления ресурсов
-    public static void addResource(Scanner scanner) {
+    public static void addResource(Scanner scanner, String fileName) {
         while (true) {
             // Запрос имени для объекта Resource
             System.out.print("Введите название расурса: ");
@@ -62,7 +63,7 @@ public class ObjectManager {
             scanner.nextLine();
             // Создаем обьект Resource
             Resource resource = new Resource(resourcetName, resourceAmount);
-            CRUDOperations.createObject(resource);
+            CRUDOperations.createObject(resource, fileName);
 
             System.out.print("Хотите ввести еще один вид ресурса? (Y/N): ");
             String response = scanner.nextLine();
