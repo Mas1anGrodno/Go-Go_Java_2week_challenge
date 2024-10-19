@@ -5,24 +5,61 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Привет! Вы хотите работать с новой симуляцией или продолжить старую?");
+        System.out.println("1) Новая симуляция");
+        System.out.println("2) Старая симуляция");
 
-        System.out.println("Привет ! Введите имя файла для сохранения данных:");
-        String fileName = scanner.nextLine();
+        int choice = Integer.parseInt(scanner.nextLine());
+        String fileName;
 
-        // Ввод растений
-        ObjectManager.addPlants(scanner, fileName);
+        if (choice == 1) {
+            System.out.println("Введите имя новой симуляции:");
+            fileName = scanner.nextLine();
+        } else {
+            fileName = ObjectManager.selectSimulation(scanner);
+            while (fileName == null) {
+                fileName = ObjectManager.selectSimulation(scanner);
+            }
+        }
 
-        // Ввод животных
-        ObjectManager.addAnimals(scanner, fileName);
+        System.out.println("Выберите действие:");
+        System.out.println("1) Добавить");
+        System.out.println("2) Прочитать");
+        System.out.println("3) Обновить");
+        System.out.println("4) Удалить");
+        System.out.println("5) Выйти");
 
-        // Ввод ресурса
-        ObjectManager.addResource(scanner, fileName);
-
-        // Вывод созданных объектов
-        System.out.println("Созданные объекты:");
-        CRUDOperations.readObjects(fileName + "_plants.txt").forEach(System.out::println);
-        CRUDOperations.readObjects(fileName + "_animals.txt").forEach(System.out::println);
-        CRUDOperations.readObjects(fileName + "_animals.txt").forEach(System.out::println);
-        scanner.close();
+        while (true) {
+            int action = Integer.parseInt(scanner.nextLine()); // Преобразование строки в целое число
+            switch (action) {
+                case 1:
+                    System.out.println("Выбрано: Добавить");
+                    ObjectManager.addEntity(scanner, fileName);
+                    break;
+                case 2:
+                    System.out.println("Выбрано: Прочитать");
+                    ObjectManager.readEntities(fileName);
+                    break;
+                case 3:
+                    System.out.println("Выбрано: Обновить");
+                    ObjectManager.updateEntity(scanner, fileName);
+                    break;
+                case 4:
+                    System.out.println("Выбрано: Удалить");
+                    ObjectManager.deleteEntity(scanner, fileName);
+                    break;
+                case 5:
+                    System.out.println("Выход из программы");
+                    return;
+                default:
+                    System.out.println("Неизвестное действие. Попробуйте снова.");
+            }
+            System.out.println("Выберите следующее действие:");
+            System.out.println("1) Добавить");
+            System.out.println("2) Прочитать");
+            System.out.println("3) Обновить");
+            System.out.println("4) Удалить");
+            System.out.println("5) Выйти");
+        }
     }
 }
