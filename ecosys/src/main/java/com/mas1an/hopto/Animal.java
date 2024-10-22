@@ -12,23 +12,6 @@ public class Animal {
         this.food = food;
     }
 
-    // геттеры и сеттеры
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     @Override
     public String toString() {
         return "Animal{name='" + name + "', amount=" + amount + ", food='" + food + "'}";
