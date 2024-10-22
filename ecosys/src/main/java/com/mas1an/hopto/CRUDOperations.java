@@ -37,39 +37,94 @@ public class CRUDOperations {
         return objects;
     }
 
-    public static void updateObject(String oldObject, String newObject, String fileName) {
+    public static void updateObject(String keyword, String newAmount, String fileName) {
         List<String> objects = readObjects(fileName);
         String directoryName = "simulations/" + fileName;
         File file = new File(directoryName, fileName + ".txt");
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String obj : objects) {
-                if (obj.equals(oldObject)) {
-                    writer.write(newObject);
-                } else {
-                    writer.write(obj);
-                }
-                writer.newLine();
+        List<String> matchingObjects = new ArrayList<>();
+        for (String obj : objects) {
+            if (obj.contains(keyword)) {
+                matchingObjects.add(obj);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    public static void deleteObject(String objectToDelete, String fileName) {
-        List<String> objects = readObjects(fileName);
-        String directoryName = "simulations/" + fileName;
-        File file = new File(directoryName, fileName + ".txt");
+        if (matchingObjects.isEmpty()) {
+            System.out.println("Совпадений не найдено.");
+            return;
+        }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String obj : objects) {
-                if (!obj.equals(objectToDelete)) {
-                    writer.write(obj);
+        System.out.println("Выберите строку для обновления:");
+        for (int i = 0; i < matchingObjects.size(); i++) {
+            System.out.println((i + 1) + ") " + matchingObjects.get(i));
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        if (choice > 0 && choice <= matchingObjects.size()) {
+            String selectedObject = matchingObjects.get(choice - 1);
+            String updatedObject = selectedObject.replaceAll("amount=\\d+", "amount=" + newAmount);
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (String obj : objects) {
+                    if (obj.equals(selectedObject)) {
+                        writer.write(updatedObject);
+                    } else {
+                        writer.write(obj);
+                    }
                     writer.newLine();
                 }
+                System.out.println("Обновление завершено.");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("Неверный выбор.");
         }
     }
+
+    public static void deleteObject(String keyword, String fileName) {
+        List<String> objects = readObjects(fileName);
+        String directoryName = "simulations/" + fileName;
+        File file = new File(directoryName, fileName + ".txt");
+
+        List<String> matchingObjects = new ArrayList<>();
+        for (String obj : objects) {
+            if (obj.contains(keyword)) {
+                matchingObjects.add(obj);
+            }
+        }
+
+        if (matchingObjects.isEmpty()) {
+            System.out.println("Совпадений не найдено.");
+            return;
+        }
+
+        System.out.println("Выберите строку для удаления:");
+        for (int i = 0; i < matchingObjects.size(); i++) {
+            System.out.println((i + 1) + ") " + matchingObjects.get(i));
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        if (choice > 0 && choice <= matchingObjects.size()) {
+            String objectToDelete = matchingObjects.get(choice - 1);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (String obj : objects) {
+                    if (!obj.equals(objectToDelete)) {
+                        writer.write(obj);
+                        writer.newLine();
+                    }
+                }
+                System.out.println("Удаление завершено.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Неверный выбор.");
+        }
+    }
+
 }

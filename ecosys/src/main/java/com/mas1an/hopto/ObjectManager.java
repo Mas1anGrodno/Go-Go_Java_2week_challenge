@@ -69,15 +69,15 @@ public class ObjectManager {
     }
 
     public static void updateEntity(Scanner scanner, String fileName) {
-        System.out.print("Введите строку для обновления: ");
-        String oldEntity = scanner.nextLine();
-        System.out.print("Введите новую строку: ");
-        String newEntity = scanner.nextLine();
-        CRUDOperations.updateObject(oldEntity, newEntity, fileName);
+        System.out.print("Введите ключевое слово для поиска строки: ");
+        String keyword = scanner.nextLine();
+        System.out.print("Введите новое значение для amount: ");
+        String newAmount = scanner.nextLine();
+        CRUDOperations.updateObject(keyword, newAmount, fileName);
     }
 
     public static void deleteEntity(Scanner scanner, String fileName) {
-        System.out.print("Введите строку для удаления: ");
+        System.out.print("Введите название для удаления: ");
         String entityToDelete = scanner.nextLine();
         CRUDOperations.deleteObject(entityToDelete, fileName);
 
