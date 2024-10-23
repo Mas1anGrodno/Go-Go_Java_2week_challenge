@@ -14,7 +14,7 @@ public class Ecosys {
 
     @Override
     public String toString() {
-        return "Animal{name='" + temperature + "', amount=" + water + ", food='" + grow + "'}";
+        return "Ecosystem{temperature='" + temperature + "', water=" + water + ", growth='" + grow + "'}";
     }
 
 }

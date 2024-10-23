@@ -23,6 +23,7 @@ public class Main {
         }
 
         System.out.println("Выберите действие:");
+        System.out.println("0) Запустить симуляцию");
         System.out.println("1) Добавить");
         System.out.println("2) Прочитать");
         System.out.println("3) Изменить колличество");
@@ -32,6 +33,10 @@ public class Main {
         while (true) {
             int action = Integer.parseInt(scanner.nextLine()); // Преобразование строки в целое число
             switch (action) {
+                case 0:
+                    System.out.println("Запускаем симуляцию");
+                    Sim.startSimulation(scanner, fileName);
+                    break;
                 case 1:
                     System.out.println("Выбрано: Добавить");
                     ObjectManager.addEntity(scanner, fileName);
@@ -55,6 +60,7 @@ public class Main {
                     System.out.println("Неизвестное действие. Попробуйте снова.");
             }
             System.out.println("Выберите следующее действие:");
+            System.out.println("0) Запустить симуляцию");
             System.out.println("1) Добавить");
             System.out.println("2) Прочитать");
             System.out.println("3) Изменить колличество");

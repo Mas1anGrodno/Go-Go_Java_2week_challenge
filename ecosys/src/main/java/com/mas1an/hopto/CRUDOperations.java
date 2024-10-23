@@ -7,8 +7,8 @@ public class CRUDOperations {
 
     // ---------------------------------------------------------------------------------------------------------------------------------
 
-    public static void createEcosysObject(Ecosys ecosys) {
-        String directoryName = "simulations";
+    public static void createEcosysObject(Ecosys ecosys, String fileName) {
+        String directoryName = "simulations/" + fileName;
         File directory = new File(directoryName);
         if (!directory.exists()) {
             directory.mkdirs();
