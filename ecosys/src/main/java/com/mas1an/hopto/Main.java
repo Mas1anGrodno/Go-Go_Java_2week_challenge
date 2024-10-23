@@ -25,7 +25,7 @@ public class Main {
         System.out.println("Выберите действие:");
         System.out.println("1) Добавить");
         System.out.println("2) Прочитать");
-        System.out.println("3) Обновить");
+        System.out.println("3) Изменить колличество");
         System.out.println("4) Удалить");
         System.out.println("5) Выйти");
 
@@ -57,7 +57,7 @@ public class Main {
             System.out.println("Выберите следующее действие:");
             System.out.println("1) Добавить");
             System.out.println("2) Прочитать");
-            System.out.println("3) Обновить");
+            System.out.println("3) Изменить колличество");
             System.out.println("4) Удалить");
             System.out.println("5) Выйти");
         }
