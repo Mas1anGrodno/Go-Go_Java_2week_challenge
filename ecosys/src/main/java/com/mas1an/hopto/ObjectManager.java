@@ -7,14 +7,16 @@ import java.util.Scanner;
 
 public class ObjectManager {
 
+    // Метод для добавления сущности
     public static void addEntity(Scanner scanner, String fileName) {
         System.out.println("Что вы хотите добавить?");
         System.out.println("1) Растение");
         System.out.println("2) Животное");
         System.out.println("3) Ресурс");
-        int entityType = Integer.parseInt(scanner.nextLine());
 
+        int entityType = Integer.parseInt(scanner.nextLine());
         List<String> objects = CRUDOperations.readObjects(fileName);
+
         switch (entityType) {
             case 1:
                 System.out.print("Введите название растения: ");
@@ -61,6 +63,7 @@ public class ObjectManager {
         }
     }
 
+    // Метод для чтения сущностей
     public static void readEntities(String fileName) {
         List<String> objects = CRUDOperations.readObjects(fileName);
         for (String obj : objects) {
@@ -68,6 +71,7 @@ public class ObjectManager {
         }
     }
 
+    // Метод для обновления сущности
     public static void updateEntity(Scanner scanner, String fileName) {
         System.out.print("Введите ключевое слово для поиска строки: ");
         String keyword = scanner.nextLine();
@@ -76,13 +80,14 @@ public class ObjectManager {
         CRUDOperations.updateObject(keyword, newAmount, fileName);
     }
 
+    // Метод для удаления сущности
     public static void deleteEntity(Scanner scanner, String fileName) {
         System.out.print("Введите название для удаления: ");
         String entityToDelete = scanner.nextLine();
         CRUDOperations.deleteObject(entityToDelete, fileName);
-
     }
 
+    // Метод для выбора симуляции
     public static String selectSimulation(Scanner scanner) {
         File directory = new File("simulations");
         String[] directories = directory.list((current, name) -> new File(current, name).isDirectory());
